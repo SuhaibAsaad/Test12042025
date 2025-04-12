@@ -1,13 +1,20 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using TMPro;
 using UnityEngine;
 
 public class CardManager : MonoBehaviour
 {
     [SerializeField] RectTransform cover, face;
+    [SerializeField] TextMeshProUGUI cardNumberText;
     float cardFlipSpeed = 1f;
     
+
+    public void AssignCard(CardData data)
+    {
+        cardNumberText.text = data.cardNumber.ToString();
+    }
 
     public void Show()
     {
