@@ -7,6 +7,8 @@ public class ScoreManager : MonoBehaviour
 {
     public static ScoreManager Instance;
     [SerializeField] TextMeshProUGUI lifeText, scoreText, comboText;
+    [SerializeField] AudioClip scoreSound, wrongSound, gameOverSound;
+    AudioSource audioSource;
     int currentScore = 0;
     int combo = 1;
     int life = 10;
@@ -14,6 +16,12 @@ public class ScoreManager : MonoBehaviour
     private void Awake()
     {
         Instance = this;
+    }
+
+    private void Start()
+    {
+        audioSource = GetComponent<AudioSource>();
+
     }
 
     public int GetCurrentScore() { return currentScore; }
@@ -40,7 +48,7 @@ public class ScoreManager : MonoBehaviour
     {
         currentScore += (1 * combo);
         combo++;
-
+        audioSource.PlayOneShot(scoreSound);
         UpdateUI();
     }
 
@@ -50,10 +58,13 @@ public class ScoreManager : MonoBehaviour
         if (life <= 0)
         {
             ResetScore();
+            audioSource.PlayOneShot(gameOverSound);
+            AppManager.instance.GameOver();
         }
         else
         {
             combo = 1;
+            audioSource.PlayOneShot(wrongSound);
         }
 
         UpdateUI();

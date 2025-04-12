@@ -7,15 +7,18 @@ using UnityEngine;
 
 public class AppManager : MonoBehaviour
 {
+    public static AppManager instance;
     [SerializeField] CardsLayoutManager cardsLayoutManager;
     [SerializeField] TMP_InputField rowsInput, columnsInput;
     [SerializeField] TextMeshProUGUI layoutErrorMessage;
+    [SerializeField] GameObject gameOverText;
     string savePath;
 
 
     private void Awake()
     {
         savePath = Application.dataPath + "/saveData.json";
+        instance = this;
     }
     public void GenerateNewLayout()
     {
@@ -54,6 +57,20 @@ public class AppManager : MonoBehaviour
 
         cardsLayoutManager.GenerateCardsFromSaveData(loadData.rows, loadData.columns, loadData.cards);
         ScoreManager.Instance.LoadSaveData(loadData.score, loadData.life, loadData.combo);
+    }
+
+    public void GameOver()
+    {
+        GenerateNewLayout();
+        StartCoroutine(ShowGameOverText());
+    }
+
+    IEnumerator ShowGameOverText()
+    {
+        gameOverText.SetActive(true);
+        yield return new WaitForSeconds(5f);
+        gameOverText.SetActive(false);
+
     }
 
     private void Update()
