@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using System.Xml.Schema;
 using Unity.VisualScripting;
 using UnityEngine;
@@ -9,6 +10,7 @@ public class CardsLayoutManager : MonoBehaviour
 {
     [SerializeField] GameObject cardPrefab;
     [SerializeField] List<CardData> cardsPool;
+    List<CardManager> cards = new List<CardManager>();
     public int rows, cols;
     int numberOfCards;
     GridLayoutGroup gridLayout;
@@ -20,29 +22,50 @@ public class CardsLayoutManager : MonoBehaviour
 
     public void GenerateCards(int rows, int columns)
     {
+        numberOfCards = rows * columns;
+        if (numberOfCards >= cardsPool.Count)
+        {
+            print("Not enough card data avaliable to generate this layout");
+            return;
+        }
+
+        if(numberOfCards % 2 != 0)
+        {
+            print("Invalid formation, number of cards must be divisible by 2");
+            return;
+        }
+
         if (transform.childCount != 0)
         {
             for (int i = transform.childCount - 1; i >= 0; i--)
             {
                 Destroy(transform.GetChild(i).gameObject);
             }
-        }
-        numberOfCards = rows * columns;
-        if (numberOfCards >= cardsPool.Count)
-        {
-            print("Not enough card data avaliable to generate this layout");
+            cards.Clear();
         }
 
         for (int i = 0; i < numberOfCards; i++)
         {
-            Instantiate(cardPrefab, transform);
+          cards.Add(Instantiate(cardPrefab, transform).GetComponent<CardManager>());
         }
 
         gridLayout.constraintCount = rows;
 
         CalculateCellSize(columns,rows);
+        LoadCardsWithData();
+    }
 
+    void LoadCardsWithData()
+    {
+        List<CardData> currentCardsPool = new List<CardData>(cardsPool).OrderBy(x => Random.value).ToList(); //shuffle the cards pool 
+        for(int i = 0,  j = 0; i < cards.Count; i++, j++)
+        {
+            cards[i].AssignCard(currentCardsPool[j]); //assign a card data to a card
+            i++;
+            cards[i].AssignCard(currentCardsPool[j]); //assign the same card data to the next card
+        }
 
+        cards = cards.OrderBy(x => Random.value).ToList(); //shuffle the cards
     }
 
     public void CalculateCellSize(int columns, int rows)

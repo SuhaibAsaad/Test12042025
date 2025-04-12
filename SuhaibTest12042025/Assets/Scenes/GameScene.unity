@@ -237,7 +237,25 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   cardPrefab: {fileID: 3305550359338685697, guid: 41c3d0d08cf5474459915e7c8025547c, type: 3}
-  cardsPool: []
+  cardsPool:
+  - {fileID: 11400000, guid: 9944515e2c0930d4a83d564b56508709, type: 2}
+  - {fileID: 11400000, guid: b454eaf9e21f3bd4b9f95ee413a7404f, type: 2}
+  - {fileID: 11400000, guid: 959f904b2cbd03448aa94ae8bb034522, type: 2}
+  - {fileID: 11400000, guid: dc2d3559094bdde478ec1eaccab2a843, type: 2}
+  - {fileID: 11400000, guid: 084759fe5aa560c45a48d12cace41a0f, type: 2}
+  - {fileID: 11400000, guid: 35736eefddd79e444bb30b9e90f65f38, type: 2}
+  - {fileID: 11400000, guid: f85b06acf877daf44a425c74bb14fa23, type: 2}
+  - {fileID: 11400000, guid: db0c0c8e6b713ad42b61bd930aea15a1, type: 2}
+  - {fileID: 11400000, guid: 49d79435f8e1d5449b8507e3888f7823, type: 2}
+  - {fileID: 11400000, guid: e31112d0d115e5549b2baf9e2dd252a6, type: 2}
+  - {fileID: 11400000, guid: d144b1ee62c80ec4c927724be29e3908, type: 2}
+  - {fileID: 11400000, guid: 1bd02444c8903bc4a900ff72e7c0a106, type: 2}
+  - {fileID: 11400000, guid: 5b80a1c8b072fb642b3c928aed34755d, type: 2}
+  - {fileID: 11400000, guid: 096e10e2f493fa14281ffd4cd35f06a0, type: 2}
+  - {fileID: 11400000, guid: c5fde933524298245b45a75c9c8388b3, type: 2}
+  - {fileID: 11400000, guid: ac150dce490d6014899c0292b71a17e7, type: 2}
+  - {fileID: 11400000, guid: e2efe10001c634c469cd0a04cac9ca2d, type: 2}
+  - {fileID: 11400000, guid: 611fc81ece7f7a04dbb36245bdfadc93, type: 2}
   rows: 5
   cols: 2
 --- !u!1 &484364855
@@ -272,10 +290,10 @@ RectTransform:
   m_Father: {fileID: 1382841440}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0.5, y: 0.5}
-  m_AnchorMax: {x: 0.5, y: 0.5}
+  m_AnchorMin: {x: 0, y: 0.5}
+  m_AnchorMax: {x: 1, y: 0.5}
   m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: 800, y: 900}
+  m_SizeDelta: {x: 0, y: 900}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!1 &519420028
 GameObject:

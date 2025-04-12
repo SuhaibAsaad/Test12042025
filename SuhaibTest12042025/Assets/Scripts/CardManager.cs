@@ -65,6 +65,13 @@ public class CardManager : MonoBehaviour
 
     private void Update()
     {
-
+        if (Input.GetKeyDown(KeyCode.F2))
+        {
+            Show();
+        }
+        else if (Input.GetKeyDown(KeyCode.F3))
+        {
+            Hide();
+        }
     }
 }
