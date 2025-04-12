@@ -8,11 +8,12 @@ public class CardManager : MonoBehaviour
 {
     [SerializeField] RectTransform cover, face;
     [SerializeField] TextMeshProUGUI cardNumberText;
+    [SerializeField] AudioSource audioSource;
     float cardFlipSpeed = 1f;
     CardData cardData;
     bool canBeSelected = true;
     bool unlocked = false;
-    
+
     public int GetCardNumber()
     {
         return cardData.cardNumber;
@@ -26,7 +27,8 @@ public class CardManager : MonoBehaviour
     public void AssignCardFromSaveData(CardSaveData data)
     {
         cardNumberText.text = data.cardData.cardNumber.ToString();
-        cardData = new CardData(data.cardData);
+        cardData = ScriptableObject.CreateInstance<CardData>();
+        cardData.LoadData(data.cardData);
         unlocked = data.unlocked;
         if(unlocked)
         {
@@ -38,6 +40,7 @@ public class CardManager : MonoBehaviour
     {
         if(!canBeSelected) { return; }
         canBeSelected = false;
+        audioSource.PlayOneShot(audioSource.clip);
         Show();
     }
 

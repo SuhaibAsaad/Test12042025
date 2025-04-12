@@ -8,7 +8,7 @@ public class CardData : ScriptableObject
 {
     public int cardNumber;
 
-    public CardData(SerializableCardData cardData)
+    public void LoadData(SerializableCardData cardData)
     {
        cardNumber = cardData.cardNumber; 
     }

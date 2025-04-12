@@ -13,6 +13,7 @@ public class AppManager : MonoBehaviour
     [SerializeField] TextMeshProUGUI layoutErrorMessage;
     [SerializeField] GameObject gameOverText;
     string savePath;
+    bool hasGeneratedLayout;
 
 
     private void Awake()
@@ -22,6 +23,7 @@ public class AppManager : MonoBehaviour
     }
     public void GenerateNewLayout()
     {
+        hasGeneratedLayout = true;
         CardsGameManager.Instance.ResetSelection();
         layoutErrorMessage.gameObject.SetActive(true); 
         layoutErrorMessage.text = cardsLayoutManager.GenerateCards(int.Parse(rowsInput.text), int.Parse(columnsInput.text));
@@ -29,6 +31,7 @@ public class AppManager : MonoBehaviour
 
     public void Save()
     {
+        if(!hasGeneratedLayout) {return; }
         SaveData saveData = new SaveData();
 
         saveData.rows = cardsLayoutManager.currentRows;
