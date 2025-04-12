@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -6,4 +7,21 @@ using UnityEngine;
 public class CardData : ScriptableObject
 {
     public int cardNumber;
+
+    public CardData(SerializableCardData cardData)
+    {
+       cardNumber = cardData.cardNumber; 
+    }
+
+}
+
+[Serializable]
+public class SerializableCardData
+{
+    public int cardNumber;
+
+    public SerializableCardData(CardData cardData)
+    {
+        cardNumber = cardData.cardNumber;
+    }
 }

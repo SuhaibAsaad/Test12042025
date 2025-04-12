@@ -30,6 +30,8 @@ public class CardsGameManager : MonoBehaviour
             if (firstSelection.GetCardNumber() == secondSelection.GetCardNumber())
             {
                 ScoreManager.Instance.RegisterCorrectAnswer();
+                firstSelection.RegisterAsUnlocked();
+                secondSelection.RegisterAsUnlocked();
             }
 
             else

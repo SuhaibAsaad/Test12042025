@@ -16,11 +16,23 @@ public class ScoreManager : MonoBehaviour
         Instance = this;
     }
 
+    public int GetCurrentScore() { return currentScore; }
+    public int GetCombo() { return combo; }
+    public int GetLife() { return life; }
+
     public void ResetScore()
     {
         currentScore = 0;
         combo = 1;
         life = 10;
+    }
+
+    public void LoadSaveData(int score, int life, int combo)
+    {
+        currentScore = score;
+        this.life = life;
+        this.combo = combo;
+        UpdateUI();
     }
 
 

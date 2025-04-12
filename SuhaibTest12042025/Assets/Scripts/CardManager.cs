@@ -11,6 +11,7 @@ public class CardManager : MonoBehaviour
     float cardFlipSpeed = 1f;
     CardData cardData;
     bool canBeSelected = true;
+    bool unlocked = false;
     
     public int GetCardNumber()
     {
@@ -22,6 +23,17 @@ public class CardManager : MonoBehaviour
         cardData = data;
     }
 
+    public void AssignCardFromSaveData(CardSaveData data)
+    {
+        cardNumberText.text = data.cardData.cardNumber.ToString();
+        cardData = new CardData(data.cardData);
+        unlocked = data.unlocked;
+        if(unlocked)
+        {
+            Show(false);
+        }
+    }
+
     public void Select()
     {
         if(!canBeSelected) { return; }
@@ -29,7 +41,17 @@ public class CardManager : MonoBehaviour
         Show();
     }
 
-    public void Show()
+    public void RegisterAsUnlocked()
+    {
+        unlocked = true;
+    }
+
+    public CardSaveData GetSaveData()
+    {
+        return new CardSaveData(cardData,unlocked);
+    }
+
+    public void Show(bool selectedByuser = true)
     {
         RotateAroundYAxis(cover, 90f, () =>
         {
@@ -37,7 +59,10 @@ public class CardManager : MonoBehaviour
             face.gameObject.SetActive(true);
             RotateAroundYAxis(face, 180, () =>
             {
-                CardsGameManager.Instance.RegisterSelection(this);
+                if (selectedByuser)
+                {
+                    CardsGameManager.Instance.RegisterSelection(this);
+                }
             });
         });
     }
@@ -86,5 +111,18 @@ public class CardManager : MonoBehaviour
         {
             Hide();
         }
+    }
+}
+
+[Serializable]
+public class CardSaveData
+{
+    public SerializableCardData cardData;
+    public bool unlocked;
+
+    public CardSaveData(CardData cardData, bool unlocked)
+    {
+        this.cardData = new SerializableCardData(cardData);
+        this.unlocked = unlocked;
     }
 }
