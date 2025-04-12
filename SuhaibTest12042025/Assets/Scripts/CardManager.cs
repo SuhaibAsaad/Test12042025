@@ -9,11 +9,24 @@ public class CardManager : MonoBehaviour
     [SerializeField] RectTransform cover, face;
     [SerializeField] TextMeshProUGUI cardNumberText;
     float cardFlipSpeed = 1f;
+    CardData cardData;
+    bool canBeSelected = true;
     
-
+    public int GetCardNumber()
+    {
+        return cardData.cardNumber;
+    }
     public void AssignCard(CardData data)
     {
         cardNumberText.text = data.cardNumber.ToString();
+        cardData = data;
+    }
+
+    public void Select()
+    {
+        if(!canBeSelected) { return; }
+        canBeSelected = false;
+        Show();
     }
 
     public void Show()
@@ -24,7 +37,7 @@ public class CardManager : MonoBehaviour
             face.gameObject.SetActive(true);
             RotateAroundYAxis(face, 180, () =>
             {
-
+                CardsGameManager.Instance.RegisterSelection(this);
             });
         });
     }
@@ -37,7 +50,7 @@ public class CardManager : MonoBehaviour
             cover.gameObject.SetActive(true);
             RotateAroundYAxis(cover, 0f, () =>
             {
-
+                canBeSelected = true;
             });
         });
     }
