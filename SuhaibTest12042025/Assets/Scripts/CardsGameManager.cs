@@ -15,6 +15,11 @@ public class CardsGameManager : MonoBehaviour
         Instance = this;
     }
 
+    public void ResetSelection()
+    {
+        currentlyOnFirstSelection = true;
+    }
+
     public void RegisterSelection(CardManager card)
     {
         if (currentlyOnFirstSelection)

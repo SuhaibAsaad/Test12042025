@@ -53,6 +53,8 @@ public class CardsLayoutManager : MonoBehaviour
           cards.Add(Instantiate(cardPrefab, transform).GetComponent<CardManager>());
         }
 
+        cards = cards.OrderBy(x => Random.value).ToList(); //shuffle the cards
+
         gridLayout.constraintCount = rows;
 
         CalculateCellSize(columns,rows);
@@ -102,8 +104,6 @@ public class CardsLayoutManager : MonoBehaviour
             i++;
             cards[i].AssignCard(currentCardsPool[j]); //assign the same card data to the next card
         }
-
-        cards = cards.OrderBy(x => Random.value).ToList(); //shuffle the cards
     }
 
     public void CalculateCellSize(int columns, int rows)

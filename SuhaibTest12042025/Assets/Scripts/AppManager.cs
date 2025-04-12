@@ -22,6 +22,7 @@ public class AppManager : MonoBehaviour
     }
     public void GenerateNewLayout()
     {
+        CardsGameManager.Instance.ResetSelection();
         layoutErrorMessage.gameObject.SetActive(true); 
         layoutErrorMessage.text = cardsLayoutManager.GenerateCards(int.Parse(rowsInput.text), int.Parse(columnsInput.text));
     }
